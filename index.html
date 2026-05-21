@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENERATOR LAPORAN ABOY - LUXURY EDITION</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <style>
+        /* ==========================================================================
+           TEMA LUXURY CYBERPUNK - HIGH BRIGHTNESS TRANSPARENT GLASS
+           ========================================================================== */
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            /* GAMBAR BACKGROUND UTAMA PENUH DAN TERANG */
+            background-image: url('https://i.postimg.cc/Qtr62Sj9/33dbb62a69c492ee4a0e158032c50ac5.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #f1f1f6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column; 
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Container Utama - Super Transparan Bening ala Kaca Mewah */
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(11, 5, 18, 0.45); 
+            backdrop-filter: blur(6px) saturate(140%);
+            -webkit-backdrop-filter: blur(6px) saturate(140%);
+            padding: 35px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(0, 240, 255, 0.25), 
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.45); 
+            overflow: hidden;
+            margin-bottom: 30px; /* Jarak aman sebelum masuk ke area bawah (carousel) */
+        }
+
+        /* Elemen Pembungkus Logo GIF Atas */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 90px; 
+            filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.6)); 
+        }
+
+        /* Judul Sistem */
+        h2 {
+            margin-top: 0;
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.3);
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 
+                0 0 8px rgba(255, 255, 255, 0.8), 
+                0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Kotak Masukan Teks */
+        textarea {
+            width: 100%;
+            height: 130px;
+            padding: 16px;
+            background-color: rgba(5, 2, 8, 0.75);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #00f0ff;
+            background-color: rgba(8, 3, 15, 0.85);
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.8),
+                0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        button {
+            flex: 1;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        /* Tombol Kirim Data */
+        .btn-submit {
+            background: linear-gradient(135deg, #9857f2 0%, #d633ff 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(214, 51, 255, 0.4);
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #a66df5 0%, #e04eff 100%);
+            box-shadow: 0 0 25px rgba(214, 51, 255, 0.7);
+        }
+
+        /* Tombol Bersihkan */
+        .btn-reset {
+            background-color: rgba(22, 13, 38, 0.65);
+            color: #e4dff0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-reset:hover {
+            background-color: rgba(33, 19, 59, 0.85);
+            color: #ffffff;
+            border-color: rgba(0, 240, 255, 0.6);
+        }
+
+        .output-section {
+            border-top: 2px solid rgba(0, 240, 255, 0.2);
+            padding-top: 25px;
+        }
+
+        /* Header Output */
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .output-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        /* TOMBOL SALIN DATA - TETAP KECIL PRESISI */
+        .btn-copy-all {
+            background: rgba(7, 3, 13, 0.6);
+            color: #00f0ff;
+            border: 1px solid #00f0ff;
+            padding: 10px 22px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+            flex: none; 
+            width: auto; 
+        }
+
+        .btn-copy-all:hover {
+            background-color: #00f0ff;
+            color: #020105;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
+        }
+
+        /* Wadah Tabel */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 240, 255, 0.5); 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(10, 5, 18, 0.65); 
+        }
+
+        th {
+            background: linear-gradient(180deg, #00f0ff 0%, #00b9cc 100%);
+            color: #020105;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 16px 18px;
+            text-align: left;
+            font-size: 13px;
+            letter-spacing: 1px;
+            border: 1px solid #020105;
+        }
+
+        td {
+            padding: 14px 18px;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        tr:nth-child(even) { background-color: rgba(11, 5, 20, 0.65); }
+        tr:nth-child(odd) { background-color: rgba(16, 7, 31, 0.65); }
+        tr:hover { background-color: rgba(0, 240, 255, 0.15) !important; }
+
+        .glow-amount {
+            color: #00f0ff; 
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+        }
+
+        .empty-message {
+            color: #a394b8;
+            font-style: italic;
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(6, 3, 9, 0.75) !important;
+        }
+
+        /* Notifikasi Sukses */
+        .toast {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #00f0ff 0%, #00b9cc 100%);
+            color: #020105;
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.5);
+            z-index: 1000;
+            animation: slideInHD 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideInHD {
+            from { transform: translateY(30px) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        /* ==========================================================================
+           CSS KUSTOM NEON CYAN - UNTUK STRUKTUR ASLI CAROUSEL ANDA (ANTI JELEK)
+           ========================================================================== */
+        
+        #latest-results.margin-top-15 {
+            background-color: rgba(6, 8, 12, 0.75) !important; /* Dibuat sedikit transparan agar tetap menyatu dengan bg terang */
+            padding: 30px 15px !important;
+            border-radius: 20px !important;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 1000px; /* Menyamakan lebar dengan container atas */
+            border: 1px solid rgba(0, 255, 255, 0.3) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        #latest-results .owl-carousel .item.slides {
+            background: rgba(16, 21, 30, 0.6) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            border: 1px solid rgba(0, 255, 255, 0.12) !important;
+            border-radius: 24px !important;
+            padding: 25px 15px !important;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+            box-sizing: border-box;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        #latest-results .owl-carousel .item.slides:hover {
+            transform: translateY(-8px) !important;
+            border-color: rgba(0, 255, 255, 0.6) !important;
+            box-shadow: 0 12px 30px rgba(0, 255, 255, 0.25), 
+                        inset 0 0 15px rgba(0, 255, 255, 0.1) !important;
+        }
+
+        #latest-results .owl-carousel .item.slides img.w-100 {
+            width: 145px !important;
+            height: 145px !important;
+            object-fit: cover !important; 
+            border-radius: 50% !important;
+            border: 2px solid #00ffff !important;
+            box-shadow: 0 0 15px #00ffff, inset 0 0 10px #00ffff !important;
+            background-color: #000000 !important;
+            margin: 0 auto !important;
+            transition: transform 0.5s ease !important;
+        }
+
+        #latest-results .owl-carousel .item.slides:hover img.w-100 {
+            transform: scale(1.06) !important;
+            box-shadow: 0 0 25px #00ffff, inset 0 0 12px #00ffff !important;
+        }
+
+        .owl-theme .owl-dots {
+            margin-top: 20px !important;
+        }
+        .owl-theme .owl-dots .owl-dot span {
+            background: rgba(0, 255, 255, 0.2) !important;
+            width: 8px !important;
+            height: 8px !important;
+            transition: all 0.3s ease !important;
+        }
+        .owl-theme .owl-dots .owl-dot.active span {
+            background: #00ffff !important;
+            width: 24px !important;
+            box-shadow: 0 0 10px #00ffff !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://cdn.bunkerkiamat.com/djarum4d/images/logo/Djarum4d.gif" alt="Djarum4d Logo">
+        </div>
+
+        <h2>🌍RUMUS WITHDRAW FLOP DJARUM4D🌍</h2>
+        
+        <div class="form-group">
+            <label for="inputData">Tempel Log Transaksi Mentah di Sini:</label>
+            <textarea id="inputData" placeholder="Tempel seluruh baris teks log di sini...
+By : CS9 Aboy⚡"></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-reset" onclick="resetInput()">Reset Input</button>
+            <button class="btn-submit" onclick="submitData()">Submit Data</button>
+        </div>
+
+        <div class="output-section">
+            <div class="output-header">
+                <div class="output-title">Data Terurai Otomatis:</div>
+                <button class="btn-copy-all" onclick="copyAllTableData()">Salin Semua Hasil Ekspor</button>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">WAKTU</th>
+                            <th style="width: 20%;">Used ID</th>
+                            <th style="width: 35%;">Tujuan Bank</th>
+                            <th style="width: 15%;"></th>
+                            <th style="width: 15%;">Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr id="emptyRow">
+                            <td colspan="5" class="empty-message">Belum ada data yang dimasukkan.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="latest-results" class="margin-top-15">        
+        <div class="owl-carousel owl-theme gameicon">                                                
+            
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/fy54yXkn/image.jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/zXXZMdP5/download-(11).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/15ChZpLw/download-(10).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/9QD3XD25/download-(9).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/HkRqrTWy/download-(8).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/ydz2TnSr/download-(7).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/qRXSDns1/download-(6).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/prW7wTC6/download-(5).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/qq1Y4TZ0/download-(4).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/CM79jGLK/download-(3).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/4NFM0X9h/download-(2).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/pX17SPF7/download-(1).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/DwJDkRrR/download.jpg" class="w-100">                    
+            </div>                                                    
+
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/fy54yXkn/image.jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/zXXZMdP5/download-(11).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/15ChZpLw/download-(10).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/9QD3XD25/download-(9).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/HkRqrTWy/download-(8).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/ydz2TnSr/download-(7).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/qRXSDns1/download-(6).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/prW7wTC6/download-(5).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/qq1Y4TZ0/download-(4).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/CM79jGLK/download-(3).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/4NFM0X9h/download-(2).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/pX17SPF7/download-(1).jpg" class="w-100">                    
+            </div>                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                        
+                <img src="https://i.postimg.cc/DwJDkRrR/download.jpg" class="w-100">                    
+            </div>                                                    
+
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/fy54yXkn/image.jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/zXXZMdP5/download-(11).jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/15ChZpLw/download-(10).jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/9QD3XD25/download-(9).jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/HkRqrTWy/download-(8).jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/ydz2TnSr/download-(7).jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/qRXSDns1/download-(6).jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/prW7wTC6/download-(5).jpg" class="w-100">                        
+            </div>                                                                                                                                                                                                    
+            <div class="item slides" data-animation="fadeIn" style='text-align:center'>                            
+                <img src="https://i.postimg.cc/qq1Y4TZ0/download-(4).jpg" class="w-100">                        
+            </div>                                                                                        
+        </div>        
+        <br>        
+    </div>    
+
+    <div id="toastNotification" class="toast">Data Siap Ditempel (Paste) ke Sheet!</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        // Logika Aktivasi Silder Carousel Anda
+        $(document).ready(function(){
+            $(".owl-carousel.gameicon").owlCarousel({
+                loop: true,
+                margin: 20,              
+                nav: false,              
+                dots: true,              
+                autoplay: true,          
+                autoplayTimeout: 3500,   
+                smartSpeed: 800,         
+                responsive:{
+                    0:{ items: 1 },
+                    576:{ items: 2 },
+                    992:{ items: 3 },
+                    1200:{ items: 4 }    
+                }
+            });
+        });
+
+        // Logika Inti Pemilah Log Transaksi (100% Utuh & Aman)
+        function submitData() {
+            const inputField = document.getElementById('inputData');
+            const tableBody = document.getElementById('tableBody');
+            const emptyRow = document.getElementById('emptyRow');
+            
+            let rawText = inputField.value.trim();
+
+            if (rawText === "") {
+                alert("Kolom data masih kosong! Silakan isi terlebih dahulu.");
+                return;
+            }
+
+            if (emptyRow) {
+                emptyRow.remove();
+            }
+
+            const blocks = rawText.split('ACCEPT');
+            let dataFound = false;
+
+            blocks.forEach(block => {
+                if (block.includes('Withdraw')) {
+                    dataFound = true;
+
+                    const parts = block.split('Withdraw');
+                    const kiriWithdraw = parts[0].trim();  
+                    const kananWithdraw = parts[1].trim(); 
+
+                    const timeMatch = kiriWithdraw.match(/\d{2}:\d{2}:\d{2}/);
+                    let waktu = "-";
+                    let userId = "-";
+
+                    if (timeMatch) {
+                        waktu = timeMatch[0]; 
+                        const indexWaktu = kiriWithdraw.indexOf(waktu);
+                        userId = kiriWithdraw.substring(indexWaktu + waktu.length).trim();
+                    }
+
+                    const indexMinus = kananWithdraw.lastIndexOf('-');
+                    let tujuanBank = "-";
+                    let jumlah = "-";
+                    let kolomKosong = ""; 
+
+                    if (indexMinus !== -1) {
+                        tujuanBank = kananWithdraw.substring(0, indexMinus).trim();
+                        jumlah = kananWithdraw.substring(indexMinus + 1).trim();
+                    } else {
+                        tujuanBank = kananWithdraw;
+                    }
+
+                    const newRow = document.createElement('tr');
+                    newRow.setAttribute('data-waktu', waktu);
+                    newRow.setAttribute('data-userid', userId);
+                    newRow.setAttribute('data-bank', tujuanBank);
+                    newRow.setAttribute('data-kosong', kolomKosong);
+                    newRow.setAttribute('data-jumlah', jumlah);
+
+                    newRow.innerHTML = `
+                        <td>${waktu}</td>
+                        <td>${userId}</td>
+                        <td>${tujuanBank}</td>
+                        <td>${kolomKosong}</td>
+                        <td class="glow-amount">${jumlah}</td>
+                    `;
+
+                    tableBody.insertBefore(newRow, tableBody.firstChild);
+                }
+            });
+
+            if (!dataFound) {
+                alert("Format data tidak dikenali. Pastikan teks mengandung kata 'Withdraw' dan 'ACCEPT'.");
+                return;
+            }
+
+            inputField.value = "";
+            inputField.focus();
+        }
+
+        function copyAllTableData() {
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.querySelectorAll('tr');
+
+            if (rows.length === 0 || document.getElementById('emptyRow')) {
+                alert("Tidak ada data hasil ekspor yang bisa disalin!");
+                return;
+            }
+
+            let linesToCopy = [];
+
+            rows.forEach(row => {
+                const waktu = row.getAttribute('data-waktu');
+                const userId = row.getAttribute('data-userid');
+                const bank = row.getAttribute('data-bank');
+                const kosong = row.getAttribute('data-kosong');
+                const jumlah = row.getAttribute('data-jumlah');
+
+                if (waktu) {
+                    linesToCopy.push(`${waktu}\t${userId}\t${bank}\t${kosong}\t${jumlah}`);
+                }
+            });
+
+            const textToCopy = linesToCopy.join('\n');
+            navigator.clipboard.writeText(textToCopy);
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toastNotification');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
+        }
+
+        function resetInput() {
+            const inputField = document.getElementById('inputData');
+            const tableBody = document.getElementById('tableBody');
+            
+            inputField.value = "";
+            
+            tableBody.innerHTML = `
+                <tr id="emptyRow">
+                    <td colspan="5" class="empty-message">Belum ada data yang dimasukkan.</td>
+                </tr>
+            `;
+            
+            inputField.focus();
+        }
+    </script>
+
+</body>
+</html>
