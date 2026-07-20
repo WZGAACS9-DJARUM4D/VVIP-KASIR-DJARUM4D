@@ -278,7 +278,7 @@ textarea:focus{
 
 .btn-group{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:16px;
     margin-bottom:16px;
 }
@@ -319,6 +319,46 @@ button:active{
     transform:scale(.97);
 }
 
+/* Efek surge energi saat semua tombol diklik */
+button::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.95);
+    box-shadow:
+        0 0 12px #fff,
+        0 0 24px var(--cyan),
+        0 0 38px var(--purple);
+    opacity:0;
+    pointer-events:none;
+    transform:translate(-50%,-50%) scale(.2);
+}
+
+button.button-surge{
+    animation:buttonSurge .48s cubic-bezier(.2,.8,.2,1);
+}
+
+button.button-surge::after{
+    animation:surgeWave .55s ease-out;
+}
+
+@keyframes buttonSurge{
+    0%{ transform:scale(1); filter:brightness(1); }
+    28%{ transform:scale(.96); filter:brightness(1.9) saturate(1.5); }
+    62%{ transform:scale(1.05); filter:brightness(1.35); }
+    100%{ transform:scale(1); filter:brightness(1); }
+}
+
+@keyframes surgeWave{
+    0%{ opacity:0; transform:translate(-50%,-50%) scale(.2); }
+    18%{ opacity:1; }
+    100%{ opacity:0; transform:translate(-50%,-50%) scale(13); }
+}
+
 .btn-submit{
     background:linear-gradient(135deg, #00c8ff, #7c3cff 55%, #ff38d1);
     box-shadow:0 12px 28px rgba(0,140,255,.28), 0 0 22px rgba(255,56,209,.18);
@@ -344,14 +384,60 @@ button:active{
 .btn-menu-wd{
     width:100%;
     min-height:58px;
-    background:linear-gradient(135deg, #fff173, #00f6ff 45%, #7c3cff);
-    color:#03101f;
-    box-shadow:0 0 30px rgba(0,246,255,.34), 0 12px 28px rgba(0,0,0,.30);
+    color:#fff;
+    border:2px solid transparent;
+    background:
+        linear-gradient(135deg, #07152c, #10143a) padding-box,
+        conic-gradient(
+            from var(--menu-angle),
+            #00f6ff,
+            #7c3cff,
+            #ff38d1,
+            #ffd36a,
+            #00f6ff
+        ) border-box;
+    box-shadow:0 0 24px rgba(0,246,255,.28), 0 12px 28px rgba(0,0,0,.30);
+    text-shadow:0 0 10px rgba(0,246,255,.85);
+    animation:rotate 2.2s linear infinite;
 }
 
 .btn-menu-wd:hover{
     transform:translateY(-3px);
-    box-shadow:0 0 38px rgba(0,246,255,.55), 0 18px 38px rgba(0,0,0,.34);
+    box-shadow:0 0 38px rgba(0,246,255,.62), 0 0 24px rgba(255,56,209,.35), 0 18px 38px rgba(0,0,0,.34);
+}
+
+.btn-menu-wd::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    right:auto;
+    top:auto;
+    bottom:7px;
+    width:28%;
+    height:3px;
+    border-radius:999px;
+    opacity:1;
+    transform:translateX(-50%);
+    background:linear-gradient(90deg, transparent, #00f6ff 18%, #fff 50%, #ff38d1 82%, transparent);
+    box-shadow:0 0 7px #00f6ff, 0 0 15px rgba(255,56,209,.9);
+    transition:width .38s ease, filter .38s ease;
+}
+
+.btn-menu-wd:hover::before,
+.btn-menu-wd:focus-visible::before{
+    width:150%;
+    transform:translateX(-50%);
+    filter:brightness(1.35);
+}
+
+@property --menu-angle{
+    syntax:"<angle>";
+    initial-value:0deg;
+    inherits:false;
+}
+
+@keyframes rotate{
+    to{ --menu-angle:360deg; }
 }
 
 .output-section{
@@ -430,9 +516,9 @@ tr:nth-child(even) td{ background:rgba(0,246,255,.035); }
 tr:hover td{ background:rgba(0,246,255,.13); }
 
 .glow-amount{
-    color:var(--gold);
+    color:var(--red);
     font-weight:900;
-    text-shadow:0 0 10px rgba(255,211,106,.75), 0 0 18px rgba(255,56,209,.25);
+    text-shadow:0 0 10px rgba(255,59,95,.85), 0 0 18px rgba(255,59,95,.35);
 }
 
 .empty-message,
@@ -523,7 +609,7 @@ tr:hover td{ background:rgba(0,246,255,.13); }
 .button-area{
     margin-top:17px;
     display:grid;
-    grid-template-columns:1fr 1fr 1fr;
+    grid-template-columns:1fr 1fr;
     gap:16px;
 }
 
@@ -867,7 +953,6 @@ By : CS9 Aboy⚡"></textarea>
 
         <div class="btn-group">
             <button class="btn-reset" onclick="resetInput()">Reset Input</button>
-            <button class="btn-submit" onclick="submitData()">Submit Data</button>
         </div>
 
         <div class="extra-menu-row">
@@ -944,7 +1029,6 @@ By : CS9 Aboy⚡"></textarea>
 CS9 : Aboy ⚡"></textarea>
 
             <div class="button-area">
-                <button class="submit-btn" onclick="prosesData()">Submit Data</button>
                 <button class="copy-btn" onclick="salinData()">Salin Hasil</button>
                 <button class="reset-btn" onclick="resetData()">Reset Input</button>
             </div>
@@ -1078,16 +1162,14 @@ document.onkeydown = function(e){
 function submitData(){
     const inputField = document.getElementById('inputDataFlop');
     const tableBody = document.getElementById('tableBody');
-    const emptyRow = document.getElementById('emptyRow');
-
     let rawText = inputField.value.trim();
 
+    tableBody.innerHTML = '';
+
     if(rawText === ''){
-        alert('Kolom data masih kosong! Silakan isi terlebih dahulu.');
+        tableBody.innerHTML = `<tr id="emptyRow"><td colspan="5" class="empty-message">Belum ada data yang dimasukkan.</td></tr>`;
         return;
     }
-
-    if(emptyRow){ emptyRow.remove(); }
 
     const blocks = rawText.split('ACCEPT');
     let dataFound = false;
@@ -1142,15 +1224,9 @@ function submitData(){
     });
 
     if(!dataFound){
-        alert("Format data tidak dikenali. Pastikan teks mengandung kata 'Withdraw' dan 'ACCEPT'.");
-        if(!document.getElementById('emptyRow') && tableBody.children.length === 0){
-            tableBody.innerHTML = `<tr id="emptyRow"><td colspan="5" class="empty-message">Setelah salin data silahkan reset input.</td></tr>`;
-        }
+        tableBody.innerHTML = `<tr id="emptyRow"><td colspan="5" class="empty-message">Format belum lengkap atau belum dikenali.</td></tr>`;
         return;
     }
-
-    inputField.value = '';
-    inputField.focus();
 }
 
 function copyAllTableData(){
@@ -1244,6 +1320,7 @@ function ambilMinimalNominal() {
 function inputMinimalBerubah() {
     const input = document.getElementById("minimalNominal");
     input.value = input.value.replace(/[^\d.,]/g, "");
+    prosesData(false);
 }
 
 function rapikanMinimalInput() {
@@ -1271,24 +1348,22 @@ function tampilKosong(pesan = "Belum ada data yang diproses") {
     `;
 }
 
-function prosesData() {
+function prosesData(rapikanInput = true) {
     const input = document.getElementById("inputDataRocket").value.trim();
     const tbody = document.getElementById("hasilBody");
     const minimalNominal = ambilMinimalNominal();
 
     tbody.innerHTML = "";
     updateTotal(0);
-    rapikanMinimalInput();
+    if (rapikanInput) rapikanMinimalInput();
 
     if (minimalNominal <= 0) {
         tampilKosong();
-        tampilNotif("Minimal WD belum benar", "error");
         return;
     }
 
     if (input === "") {
         tampilKosong();
-        tampilNotif("Silakan masukkan data terlebih dahulu", "error");
         return;
     }
 
@@ -1322,6 +1397,7 @@ function prosesData() {
 
                 tdId.innerText = currentId;
                 tdNominal.innerText = nominalText;
+                tdNominal.className = "glow-amount";
                 tdKet.innerHTML = `<span class="ket-badge">WD</span>`;
 
                 tr.appendChild(tdId);
@@ -1340,9 +1416,6 @@ function prosesData() {
 
     if (jumlahTerurai === 0) {
         tampilKosong("Tidak ada WD sesuai minimal yang kamu tentukan");
-        tampilNotif("Tidak ada WD sesuai minimal yang kamu tentukan", "error");
-    } else {
-        tampilNotif("Data berhasil diproses");
     }
 }
 
@@ -1399,6 +1472,24 @@ function resetData() {
     tampilKosong();
     tampilNotif("Data sudah direset");
 }
+
+// Uraikan otomatis setiap kali data diketik atau ditempel.
+document.getElementById('inputDataFlop').addEventListener('input', submitData);
+document.getElementById('inputDataRocket').addEventListener('input', prosesData);
+
+// Jalankan ulang animasi surge pada setiap klik tombol.
+document.addEventListener('click', function(event){
+    const button = event.target.closest('button');
+    if(!button) return;
+
+    button.classList.remove('button-surge');
+    void button.offsetWidth;
+    button.classList.add('button-surge');
+
+    setTimeout(function(){
+        button.classList.remove('button-surge');
+    }, 560);
+});
 </script>
 
 </body>
