@@ -381,6 +381,67 @@ button.button-surge::after{
     box-shadow:0 0 24px rgba(0,246,255,.16), inset 0 0 18px rgba(255,255,255,.07);
 }
 
+/* Animasi shake + glitch khusus tombol Reset Input */
+.btn-reset:hover,
+.reset-btn:hover{
+    animation:btnShake .6s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.btn-reset .letter,
+.reset-btn .letter{
+    display:inline-block;
+    position:relative;
+    z-index:2;
+}
+
+.btn-reset:hover .letter,
+.reset-btn:hover .letter{
+    animation:letterGlitch .42s steps(2,end) infinite;
+    animation-delay:calc(var(--letter-index) * 35ms);
+}
+
+@keyframes btnShake{
+    0%,100%{ transform:translate3d(0,-3px,0) rotate(0); }
+    15%{ transform:translate3d(-5px,-3px,0) rotate(-1deg); }
+    30%{ transform:translate3d(5px,-3px,0) rotate(1deg); }
+    45%{ transform:translate3d(-4px,-3px,0) rotate(-.8deg); }
+    60%{ transform:translate3d(4px,-3px,0) rotate(.8deg); }
+    75%{ transform:translate3d(-2px,-3px,0) rotate(-.4deg); }
+    90%{ transform:translate3d(2px,-3px,0) rotate(.4deg); }
+}
+
+@keyframes letterGlitch{
+    0%,100%{
+        transform:translate(0,0) skewX(0);
+        color:#fff;
+        text-shadow:0 0 8px rgba(255,255,255,.75);
+    }
+    25%{
+        transform:translate(-2px,1px) skewX(10deg);
+        color:#00f6ff;
+        text-shadow:2px 0 #ff3b5f, -2px 0 #00f6ff;
+    }
+    50%{
+        transform:translate(2px,-1px) skewX(-12deg);
+        color:#fff;
+        text-shadow:-3px 0 #ff38d1, 3px 0 #00f6ff;
+    }
+    75%{
+        transform:translate(-1px,-1px) skewX(7deg);
+        color:#ff6b82;
+        text-shadow:2px 0 #00f6ff, -2px 0 #ff3b5f;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .btn-reset:hover,
+    .reset-btn:hover,
+    .btn-reset:hover .letter,
+    .reset-btn:hover .letter{
+        animation:none;
+    }
+}
+
 .btn-menu-wd{
     width:100%;
     min-height:58px;
@@ -1472,6 +1533,16 @@ function resetData() {
     tampilKosong();
     tampilNotif("Data sudah direset");
 }
+
+// Pecah teks tombol reset per huruf agar efek glitch bergerak bergantian.
+document.querySelectorAll('.btn-reset, .reset-btn').forEach(function(button){
+    const text = button.textContent.trim();
+    button.setAttribute('aria-label', text);
+    button.innerHTML = Array.from(text).map(function(character, index){
+        const safeCharacter = character === ' ' ? '&nbsp;' : character;
+        return '<span class="letter" aria-hidden="true" style="--letter-index:' + index + '">' + safeCharacter + '</span>';
+    }).join('');
+});
 
 // Uraikan otomatis setiap kali data diketik atau ditempel.
 document.getElementById('inputDataFlop').addEventListener('input', submitData);
