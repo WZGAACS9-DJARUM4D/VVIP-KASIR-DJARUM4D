@@ -278,9 +278,13 @@ textarea:focus{
 
 .btn-group{
     display:grid;
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:16px;
     margin-bottom:16px;
+}
+
+.btn-group .btn-copy-all{
+    width:100%;
 }
 
 .extra-menu-row{
@@ -1014,6 +1018,7 @@ By : CS9 Aboy⚡"></textarea>
 
         <div class="btn-group">
             <button class="btn-reset" onclick="resetInput()">Reset Input</button>
+            <button class="btn-copy-all" onclick="copyAllTableData()">Salin Semua Hasil Ekspor</button>
         </div>
 
         <div class="extra-menu-row">
@@ -1023,7 +1028,6 @@ By : CS9 Aboy⚡"></textarea>
         <div class="output-section">
             <div class="output-header">
                 <div class="output-title">Data Terurai Otomatis:</div>
-                <button class="btn-copy-all" onclick="copyAllTableData()">Salin Semua Hasil Ekspor</button>
             </div>
 
             <div class="table-container">
